@@ -104,10 +104,20 @@ export function DataTable<TData, TValue>({
         <div>
             <div className="flex items-center py-4">
                 <Input
-                    placeholder="Filter tasks..."
+                    placeholder="Filter tasks by date..."
                     value={(table.getColumn("date")?.getFilterValue() as string) ?? ""}
                     onChange={(event) =>
                         table.getColumn("date")?.setFilterValue(event.target.value)
+                    }
+                    className="max-w-sm"
+                />
+            </div>
+            <div className="flex items-center py-4">
+                <Input
+                    placeholder="Filter tasks by status..."
+                    value={(table.getColumn("state")?.getFilterValue() as string) ?? ""}
+                    onChange={(event) =>
+                        table.getColumn("state")?.setFilterValue(event.target.value)
                     }
                     className="max-w-sm"
                 />
@@ -141,7 +151,7 @@ export function DataTable<TData, TValue>({
                                 >
                                     {row.getVisibleCells().map((cell) => (
                                         <TableCell key={cell.id}>
-                                            {cell.id.toString().substring(2).includes("description")?
+                                            {cell.id.toString().substring(2).includes("description") ?
                                                 (
                                                     tokenizer(cell.getValue()?.toString())
                                                 ) :
